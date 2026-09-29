@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Anita Layon · Enlaces</title>
+<style>
+  :root {
+    --fondo: #E9E4EC;
+    --tinta: #2B2233;
+    --vino: #7A2E4D;
+    --vino-oscuro: #5E2039;
+    --lila: #C9A7B5;
+    --papel: #F6F3F8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: var(--fondo);
+    color: var(--tinta);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    width: 100%;
+    max-width: 440px;
+    padding: 56px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .avatar {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background: var(--vino);
+    color: var(--papel);
+    display: grid;
+    place-items: center;
+    font-size: 46px;
+    font-style: italic;
+    overflow: hidden;
+    box-shadow: 0 0 0 6px var(--fondo), 0 0 0 7px var(--lila);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  h1 {
+    margin-top: 28px;
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .lema {
+    margin-top: 10px;
+    font-size: 18px;
+    font-style: italic;
+    color: #5C4F66;
+  }
+  .principal {
+    margin-top: 40px;
+    width: 100%;
+    display: block;
+    padding: 18px 24px;
+    background: var(--vino);
+    color: var(--papel);
+    text-decoration: none;
+    font-size: 19px;
+    border-radius: 999px;
+    transition: background .2s, transform .2s;
+  }
+  .principal:hover { background: var(--vino-oscuro); }
+  .principal:active { transform: scale(.98); }
+  .secundarios {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .secundarios a {
+    display: block;
+    padding: 14px 24px;
+    border: 1px solid var(--lila);
+    border-radius: 999px;
+    color: var(--tinta);
+    text-decoration: none;
+    font-size: 17px;
+    transition: background .2s;
+  }
+  .secundarios a:hover { background: var(--papel); }
+  a:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+  .aviso {
+    margin-top: 48px;
+    max-width: 320px;
+    font-size: 14px;
+    color: #6B5E75;
+  }
+  /* Una sola entrada al cargar la página */
+  .avatar, h1, .lema, .principal { animation: entrar .7s ease both; }
+  h1 { animation-delay: .08s; }
+  .lema { animation-delay: .16s; }
+  .principal { animation-delay: .28s; }
+  @keyframes entrar { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="avatar" id="avatar" aria-hidden="true">A</div>
+  <h1 id="nombre">Anita Layon</h1>
+  <p class="lema" id="lema">Lo exclusivo lo comparto en mi espacio privado.</p>
+
+  <a class="principal" id="principal" href="https://onlyfans.com/anitalayon" target="_blank" rel="noopener noreferrer">Entrar a mi espacio exclusivo</a>
+
+  <nav class="secundarios" id="secundarios" aria-label="Otras redes"></nav>
+
+  <p class="aviso">Contenido solo para mayores de 18 años.</p>
+</main>
+
+<script>
+  // ====== EDITA SOLO ESTA PARTE ======
+  const PERFIL = {
+    nombre: "Anita Layon",
+    lema: "Lo exclusivo lo comparto en mi espacio privado.",
+    foto: "",   // URL de tu foto de perfil (opcional). Si la dejas vacía, se muestra tu inicial.
+    principal: "https://onlyfans.com/anitalayon",
+    botonPrincipal: "Entrar a mi espacio exclusivo",
+    // Añade tus redes: solo se muestran las que tengan enlace.
+    redes: [
+      { texto: "Instagram", url: "" },
+      { texto: "Facebook",  url: "" },
+      { texto: "X (Twitter)", url: "" },
+      { texto: "TikTok",    url: "" }
+    ]
+  };
+  // ===================================
+
+  document.title = PERFIL.nombre + " · Enlaces";
+  document.getElementById("nombre").textContent = PERFIL.nombre;
+  document.getElementById("lema").textContent = PERFIL.lema;
+
+  const principal = document.getElementById("principal");
+  principal.href = PERFIL.principal;
+  principal.textContent = PERFIL.botonPrincipal;
+
+  const avatar = document.getElementById("avatar");
+  if (PERFIL.foto) {
+    const img = document.createElement("img");
+    img.src = PERFIL.foto;
+    img.alt = "";
+    avatar.textContent = "";
+    avatar.appendChild(img);
+  } else {
+    avatar.textContent = PERFIL.nombre.trim().charAt(0).toUpperCase();
+  }
+
+  const nav = document.getElementById("secundarios");
+  PERFIL.redes.filter(r => r.url).forEach(r => {
+    const a = document.createElement("a");
+    a.href = r.url;
+    a.textContent = r.texto;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    nav.appendChild(a);
+  });
+</script>
+</body>
+</html>
